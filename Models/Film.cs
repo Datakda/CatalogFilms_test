@@ -20,7 +20,9 @@ namespace Catalog_films_test.Models
 
         public string UrlImage;
 
-        public int OwnerUserID;
+        public int UserID; // внешний ключ
+
+        public User User; // навигационное свойство
 
 
     }
