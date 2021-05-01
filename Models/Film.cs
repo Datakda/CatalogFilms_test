@@ -18,6 +18,8 @@ namespace Catalog_films_test.Models
 
         public string Producer;
 
+        public string UrlImage;
+
         public int OwnerUserID;
 
 
