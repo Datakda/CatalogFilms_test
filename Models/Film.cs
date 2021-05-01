@@ -8,21 +8,21 @@ namespace Catalog_films_test.Models
 {
     public class Film
     {   [Key]
-        public int Id;
+        public int Id { get; set; }
 
-        public string Name;
+        public string Name { get; set; }
 
-        public string Description;
+        public string Description { get; set; }
 
-        public int Yers;
+        public int Yers { get; set; }
 
-        public string Producer;
+        public string Producer { get; set; }
 
-        public string UrlImage;
+        public string UrlImage { get; set; }
 
-        public int UserID; // внешний ключ
+        public int UserID { get; set; } // внешний ключ
 
-        public User User; // навигационное свойство
+        public User User { get; set; } // навигационное свойство
 
 
     }

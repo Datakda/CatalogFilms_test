@@ -9,11 +9,11 @@ namespace Catalog_films_test.Models
     public class User
     {   
         [Key]
-        public int Id;
+        public int Id { get; set; }
 
-        public string Name;
+        public string Name { get; set; }
 
-        public List<Film> Films;
+        public List<Film> Films { get; set; }
 
 
     }
