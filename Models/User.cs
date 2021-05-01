@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace Catalog_films_test.Models
 {
     public class User
-    {   [Key]
+    {   
+        [Key]
         public int Id;
 
         public string Name;
