@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Catalog_films_test.Migrations
 {
-    [DbContext(typeof(AppContext))]
+    [DbContext(typeof(AppBDContext))]
     [Migration("20210501212325_InitialCreate")]
     partial class InitialCreate
     {

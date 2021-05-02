@@ -2,14 +2,16 @@
 using Catalog_films_test.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Catalog_films_test.Migrations
 {
     [DbContext(typeof(AppBDContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20210501230923_3")]
+    partial class _3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -4,18 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Catalog_films_test.Models
+namespace Catalog_films_test.ViewModels
 {
-    public class User
-    {   
-        [Key]
-        public int Id { get; set; }
-
+    public class LoginModel
+    {
+        [Required(ErrorMessage = "Не указан Login")]
         public string Login { get; set; }
 
+        [Required(ErrorMessage = "Не указан пароль")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
-        public List<Film> Films { get; set; }
-
-
     }
 }

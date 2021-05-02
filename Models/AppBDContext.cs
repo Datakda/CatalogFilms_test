@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Catalog_films_test.Models
 {
-    public class AppContext : DbContext
+    public class AppBDContext : DbContext
     {
 
         public DbSet<User> Users { get; set; }
