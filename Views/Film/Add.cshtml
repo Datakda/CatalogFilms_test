@@ -1,48 +1,66 @@
 ﻿@model Catalog_films_test.ViewModels.AddFilmModel
 
-Представление для добавления фильма
-
-<form asp-action="Add" asp-controller="Film" asp-anti-forgery="true" enctype="multipart/form-data">
-    <div class="validation" asp-validation-summary="ModelOnly"></div>
-    <div>
-        <div>
-            <label asp-for="Name" class="control-label">Введите название фильма</label><br />
-            <input type="text" asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
+<div class="col-md-10 mx-auto py-4">
+    <div class="card">
+        <div class="card-header bg-primary text-uppercase text-white">
+            <h4>Add New </h4>
         </div>
+        <div class="card-body">
+            <form asp-action="Add" asp-controller="Film" asp-anti-forgery="true" enctype="multipart/form-data">
+                <div class="validation" asp-validation-summary="ModelOnly"></div>
+                <div>
+                    <div>
+                        <label asp-for="Name" class="control-label">Введите название фильма</label><br />
+                        <input type="text" asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
 
-        <div>
-            <label asp-for="Description" class="control-label">Введите описание фильма</label><br />
-            <textarea type="text" asp-for="Description" class="form-control"></textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
+                    <div>
+                        <label asp-for="Description" class="control-label">Введите описание фильма</label><br />
+                        <textarea type="text" asp-for="Description" class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
 
-        <div>
-            <label asp-for="Yers" class="control-label">Введите год фильма</label><br />
-            <input type="number" asp-for="Yers" class="form-control" />
-            <span asp-validation-for="Yers" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="Producer" class="control-label">Введите режисера</label><br />
-            <input type="text" asp-for="Producer" class="form-control" />
-            <span asp-validation-for="Producer" class="text-danger"></span>
-        </div>
+                    <div>
+                        <label asp-for="Yers" class="control-label">Введите год фильма</label><br />
+                        <input type="number" asp-for="Yers" class="form-control" />
+                        <span asp-validation-for="Yers" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Producer" class="control-label">Введите режисера</label><br />
+                        <input type="text" asp-for="Producer" class="form-control" />
+                        <span asp-validation-for="Producer" class="text-danger"></span>
+                    </div>
 
-        <div class="col-md-6">
-            <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <div class="custom-file">
-                    <input asp-for="Image" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">Choose file</label>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Image" class="control-label">Загрузите постер</label>
+                            <div class="custom-file">
+                                <input asp-for="Image" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
+                    </div>
                 </div>
-                <span asp-validation-for="Image" class="text-danger"></span>
-            </div>
+
+                <div>
+                    <input type="submit" value="Загрузить" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
+                </div>
+                <h3>@ViewBag.Message</h3>
+
+            </form>
         </div>
-    </div>
 
-    <div>
-        <input type="submit" value="Загрузить" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
     </div>
-    <h3>@ViewBag.Message</h3>
+</div>
+@section scripts{
+    <script type="text/javascript">
 
-</form>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}  

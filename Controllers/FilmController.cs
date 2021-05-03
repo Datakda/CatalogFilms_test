@@ -68,28 +68,13 @@ namespace Catalog_films_test.Controllers
                 return View();
 
             }
-
-
-            /* 
-            if (model.ProfileImage != null)
-            {
-                // путь к папке Files
-                string path = "/Images/" + model.ProfileImage.FileName;
-                // сохраняем файл в папку Files в каталоге wwwroot
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
-                {
-                    model.ProfileImage.CopyToAsync(fileStream);
-                }
-                
-               
-            }
-            */
-            
+ 
             return View();
 
 
             
         }
+
         // страница редактирования данных о фильме;
         public IActionResult Edit()
         {
