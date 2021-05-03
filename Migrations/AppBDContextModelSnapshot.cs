@@ -2,16 +2,14 @@
 using Catalog_films_test.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Catalog_films_test.Migrations
 {
     [DbContext(typeof(AppBDContext))]
-    [Migration("20210501230923_3")]
-    partial class _3
+    partial class AppBDContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,15 +33,13 @@ namespace Catalog_films_test.Migrations
                     b.Property<string>("UrlImage")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("UserLogin")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("Yers")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Films");
                 });
@@ -63,22 +59,6 @@ namespace Catalog_films_test.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Catalog_films_test.Models.Film", b =>
-                {
-                    b.HasOne("Catalog_films_test.Models.User", "User")
-                        .WithMany("Films")
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Catalog_films_test.Models.User", b =>
-                {
-                    b.Navigation("Films");
                 });
 #pragma warning restore 612, 618
         }

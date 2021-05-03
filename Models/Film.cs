@@ -20,9 +20,9 @@ namespace Catalog_films_test.Models
 
         public string UrlImage { get; set; }
 
-        public int UserID { get; set; } // внешний ключ
+        public string UserLogin { get; set; } // внешний ключ
 
-        public User User { get; set; } // навигационное свойство
+        
 
 
     }
