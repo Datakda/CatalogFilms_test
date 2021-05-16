@@ -1,9 +1,7 @@
-﻿@model IQueryable<Film>
+﻿@model Catalog_films_test.Models.Film
 
-@{
-    ViewData["Title"] = "Home Page";
-}
-@ViewBag.count
+
+
 <table class="table">
     <thead>
         <tr>
@@ -16,21 +14,20 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (Film u in Model)
-        {
+       
             <tr>
-                <th scope="row">@u.Id</th>
+                <th scope="row">@Model.Id</th>
                 <td>
                     <div class="text-center">
-                        <img src="@u.UrlImage" class="rounded" alt="...">
+                        <img src="@Model.UrlImage" class="rounded" alt="...">
                     </div>
                 </td>
-                <td>@u.Name</td>
-                <td>@u.Description</td>
-                <td>@u.Producer</td>
-                <td>@u.Yers</td>
+                <td>@Model.Name</td>
+                <td>@Model.Description</td>
+                <td>@Model.Producer</td>
+                <td>@Model.Yers</td>
             </tr>
-        }
+       
 
 
     </tbody>

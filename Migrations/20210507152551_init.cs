@@ -2,7 +2,7 @@
 
 namespace Catalog_films_test.Migrations
 {
-    public partial class t2 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,7 @@ namespace Catalog_films_test.Migrations
                     Yers = table.Column<int>(type: "INTEGER", nullable: false),
                     Producer = table.Column<string>(type: "TEXT", nullable: true),
                     UrlImage = table.Column<string>(type: "TEXT", nullable: true),
-                    UserLogin = table.Column<string>(type: "TEXT", nullable: true)
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

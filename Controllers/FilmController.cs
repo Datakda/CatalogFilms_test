@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Catalog_films_test.Controllers
@@ -26,9 +28,21 @@ namespace Catalog_films_test.Controllers
 
 
         //списка всех фильмов (с пагинацией);
-        public IActionResult Index()
+        public  IActionResult Index(int page = 1)
         {
-            return View();
+            int pageSize = 3;   // количество элементов на странице
+
+            List<Film> source = db.Films.ToList();
+            var count = source.Count();
+            var items = source.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+            IndexViewModel viewModel = new IndexViewModel
+            {
+                PageViewModel = pageViewModel,
+                Films = items
+            };
+            return View(viewModel);
         }
 
         
@@ -46,7 +60,7 @@ namespace Catalog_films_test.Controllers
             if (ModelState.IsValid) 
             {
                 string path = "/Images/" + model.Image.FileName;
-                // сохраняем файл в папку Files в каталоге wwwroot
+                // сохраняем файл в папку Images в каталоге wwwroot
                 using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                 {
                     model.Image.CopyTo(fileStream);
@@ -58,8 +72,9 @@ namespace Catalog_films_test.Controllers
                 film.Description = model.Description;
                 film.Producer = model.Producer;
                 film.Yers = model.Yers;
-                film.UrlImage = path;
-                film.UserLogin = User.Identity.Name;
+                film.UrlImage = path; 
+                film.UserId = db.Users.FirstOrDefault(usr => usr.Login == User.Identity.Name).Id;
+
 
                 db.Add(film);
                 db.SaveChanges();
@@ -83,6 +98,21 @@ namespace Catalog_films_test.Controllers
 
 
         //страница одного отдельного фильма;
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else 
+            {
+            Film  film =  db.Films.Where(x => x.Id == id).FirstOrDefault();
 
+                if (film != null) { return View(film); }
+                else { return RedirectToAction("Index", "Home"); }
+            }
+
+            
+        }
     }
 }

@@ -1,9 +1,8 @@
-﻿@model IQueryable<Film>
+﻿@model IndexViewModel
 
-@{
-    ViewData["Title"] = "Home Page";
-}
-@ViewBag.count
+
+
+
 <table class="table">
     <thead>
         <tr>
@@ -16,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (Film u in Model)
+        @foreach (Film u in Model.Films)
         {
             <tr>
                 <th scope="row">@u.Id</th>
@@ -35,3 +34,21 @@
 
     </tbody>
 </table>
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       class="btn btn-outline-dark">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       class="btn btn-outline-dark">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}

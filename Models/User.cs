@@ -15,6 +15,9 @@ namespace Catalog_films_test.Models
 
         public string Password { get; set; }
        
+      
+
+      
 
 
     }

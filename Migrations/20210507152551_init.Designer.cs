@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Catalog_films_test.Migrations
 {
     [DbContext(typeof(AppBDContext))]
-    [Migration("20210503161734_t2")]
-    partial class t2
+    [Migration("20210507152551_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,8 +35,8 @@ namespace Catalog_films_test.Migrations
                     b.Property<string>("UrlImage")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UserLogin")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Yers")
                         .HasColumnType("INTEGER");

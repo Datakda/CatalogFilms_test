@@ -13,15 +13,22 @@ namespace Catalog_films_test.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private AppBDContext db;
+        public HomeController(AppBDContext context,ILogger<HomeController> logger)
         {
+            db = context;
             _logger = logger;
         }
         [Authorize]
         public IActionResult Index()
         {
-            return View();
+
+          
+            
+            
+             var films = db.Films.Take(db.Films.Count()) ;
+            ViewBag.count = films.Count();
+            return View(films);
         }
 
         public IActionResult Privacy()

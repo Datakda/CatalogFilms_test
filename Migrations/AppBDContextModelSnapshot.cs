@@ -33,8 +33,8 @@ namespace Catalog_films_test.Migrations
                     b.Property<string>("UrlImage")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UserLogin")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Yers")
                         .HasColumnType("INTEGER");
