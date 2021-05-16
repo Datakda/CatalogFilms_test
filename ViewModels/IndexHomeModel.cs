@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Catalog_films_test.ViewModels
 {
-    public class IndexHomeViewModel
+    public class IndexHomeModel
     {
         public string NameUser { get; set; }
 

@@ -23,7 +23,7 @@ namespace Catalog_films_test.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            IndexHomeViewModel  model = new IndexHomeViewModel();
+            IndexHomeModel  model = new IndexHomeModel();
 
             model.NameUser = User.Identity.Name;
             model.CountAllFilms = db.Films.Count();

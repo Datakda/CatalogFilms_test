@@ -14,21 +14,25 @@
         </tr>
     </thead>
     <tbody>
-       
-            <tr>
-                <th scope="row">@Model.Id</th>
-                <td>
-                    <div class="text-center">
-                        <img src="@Model.UrlImage" class="rounded" alt="...">
-                    </div>
-                </td>
-                <td>@Model.Name</td>
-                <td>@Model.Description</td>
-                <td>@Model.Producer</td>
-                <td>@Model.Yers</td>
-            </tr>
-       
+
+        <tr>
+            <th scope="row">@Model.Id</th>
+            <td>
+                <div class="text-center">
+                    <img src="@Model.UrlImage" class="rounded" alt="...">
+                </div>
+            </td>
+            <td>@Model.Name</td>
+            <td>@Model.Description</td>
+            <td>@Model.Producer</td>
+            <td>@Model.Yers</td>
+        </tr>
+
 
 
     </tbody>
 </table>
+@if (ViewBag.Owner == true) 
+{ 
+<a class="btn btn-primary btn-lg active" asp-controller="Film" asp-action="Edit" asp-route-id="@Model.Id" role="button">Редактировать фильм</a>
+}

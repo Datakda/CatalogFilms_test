@@ -78,7 +78,7 @@ namespace Catalog_films_test.Controllers
 
                 db.Add(film);
                 db.SaveChanges();
-                ViewBag.Message = "Hello ASP.NET Core";
+                
                 ViewBag.Message = $"Спасибо {User.Identity.Name} фильм {model.Name} добавлен в каталог";
                 return View();
 
@@ -91,15 +91,34 @@ namespace Catalog_films_test.Controllers
         }
 
         // страница редактирования данных о фильме;
-        public IActionResult Edit()
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+
+          Film film = db.Films.Where(x => x.Id == id).FirstOrDefault();
+            if (film.UserId != db.Users.FirstOrDefault(usr => usr.Login == User.Identity.Name).Id)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View(film);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Film model)
         {
             return View();
         }
-
-
         //страница одного отдельного фильма;
         public IActionResult Details(int? id)
         {
+            if (db.Films.Where(x => x.Id == id).FirstOrDefault().UserId == db.Users.FirstOrDefault(usr => usr.Login == User.Identity.Name).Id)
+            {
+                ViewBag.Owner = true;
+            }
+            else 
+            {
+                ViewBag.Owner = false;
+            }
             if (id == null)
             {
                 return RedirectToAction("Index", "Home");
