@@ -2,7 +2,7 @@
 
 
 
-
+<a class="btn btn-primary btn-lg active" asp-controller="Film" asp-action="Add" role="button">Добавить фильм.</a>
 <table class="table">
     <thead>
         <tr>
@@ -21,10 +21,10 @@
                 <th scope="row">@u.Id</th>
                 <td>
                     <div class="text-center">
-                        <img src="@u.UrlImage" class="rounded" alt="...">
+                        <a asp-controller="Film" asp-action="Details" asp-route-id="@u.Id"> <img src="@u.UrlImage" class="rounded" ></a>
                     </div>
                 </td>
-                <td>@u.Name</td>
+                <td><a asp-controller="Film" asp-action="Details" asp-route-id="@u.Id">@u.Name</a></td>
                 <td>@u.Description</td>
                 <td>@u.Producer</td>
                 <td>@u.Yers</td>

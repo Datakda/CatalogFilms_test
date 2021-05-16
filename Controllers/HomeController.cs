@@ -1,4 +1,5 @@
 ﻿using Catalog_films_test.Models;
+using Catalog_films_test.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -22,13 +23,13 @@ namespace Catalog_films_test.Controllers
         [Authorize]
         public IActionResult Index()
         {
+            IndexHomeViewModel  model = new IndexHomeViewModel();
 
-          
-            
-            
-             var films = db.Films.Take(db.Films.Count()) ;
-            ViewBag.count = films.Count();
-            return View(films);
+            model.NameUser = User.Identity.Name;
+            model.CountAllFilms = db.Films.Count();
+            model.CountUserFilms = db.Films.Where(x => x.UserId == db.Users.FirstOrDefault(usr => usr.Login == User.Identity.Name).Id).Count();
+
+            return View(model);
         }
 
         public IActionResult Privacy()
