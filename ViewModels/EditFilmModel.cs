@@ -21,7 +21,7 @@ namespace Catalog_films_test.ViewModels
 
         [Required(ErrorMessage = "Пожалуйста введите имя режисера")]
         public string Producer { get; set; }
-
+        public string UrlImage { get; set; }
         public IFormFile Image { get; set; }
     }
 }

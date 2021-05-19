@@ -94,23 +94,66 @@ namespace Catalog_films_test.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            
+            Film film = db.Films.Where(x => x.Id == id).FirstOrDefault();
 
-          Film film = db.Films.Where(x => x.Id == id).FirstOrDefault();
+            //Проверка есть ли права на редактирования фильма у юзера, если нет то редирект на главную.
             if (film.UserId != db.Users.FirstOrDefault(usr => usr.Login == User.Identity.Name).Id)
             {
                 return RedirectToAction("Index", "Home");
             }
-            return View(film);
+            EditFilmModel model = new EditFilmModel();
+            model.Id = film.Id;
+            model.Name = film.Name;
+            model.Description = film.Description;
+            model.Producer = film.Producer;
+            model.Yers = film.Yers;
+            model.UrlImage = film.UrlImage;
+
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Edit(Film model)
+        public IActionResult Edit(EditFilmModel model)
         {
+            if (ModelState.IsValid)
+            {
+                Film film = db.Films.Where(x => x.Id == model.Id).FirstOrDefault();
+                film.Id = model.Id;
+                film.Name = model.Name;
+                film.Description = model.Description;
+                film.Producer = model.Producer;
+                film.Yers = model.Yers;
+                film.UrlImage = model.UrlImage;
+
+                //Если картинка загружена то удаляем старую.
+                if(model.Image != null)
+                {
+
+                   
+                
+                    string path = "/Images/" + model.Image.FileName;
+                
+                    using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                    {
+                    model.Image.CopyTo(fileStream);
+                    }
+
+                }
+
+            return View();
+
+            }
+
             return View();
         }
+
+
+
         //страница одного отдельного фильма;
         public IActionResult Details(int? id)
         {
+            //Проверка загрузил ли этат юзер фильм что бы потом показать ему кнопку редактирования
             if (db.Films.Where(x => x.Id == id).FirstOrDefault().UserId == db.Users.FirstOrDefault(usr => usr.Login == User.Identity.Name).Id)
             {
                 ViewBag.Owner = true;
@@ -127,7 +170,10 @@ namespace Catalog_films_test.Controllers
             {
             Film  film =  db.Films.Where(x => x.Id == id).FirstOrDefault();
 
-                if (film != null) { return View(film); }
+                if (film != null) 
+                { 
+                    return View(film); 
+                }
                 else { return RedirectToAction("Index", "Home"); }
             }
 
