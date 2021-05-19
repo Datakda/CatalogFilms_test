@@ -124,7 +124,7 @@ namespace Catalog_films_test.Controllers
                 film.Description = model.Description;
                 film.Producer = model.Producer;
                 film.Yers = model.Yers;
-                film.UrlImage = model.UrlImage;
+                
 
                 //Если картинка загружена то удаляем старую.
                 if(model.Image != null)
@@ -133,15 +133,24 @@ namespace Catalog_films_test.Controllers
                    
                 
                     string path = "/Images/" + model.Image.FileName;
-                
+                    FileInfo fileInf = new FileInfo($"wwwroot{film.UrlImage}");
+                    if (fileInf.Exists)
+                    {
+                        fileInf.Delete();
+                        
+                    }
                     using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                     {
+
                     model.Image.CopyTo(fileStream);
                     }
+                    film.UrlImage = path;
 
                 }
+                db.Films.Update(film);
+                db.SaveChanges();
 
-            return View();
+            return RedirectToAction("Details", new { id = film.Id }  );
 
             }
 
@@ -177,7 +186,10 @@ namespace Catalog_films_test.Controllers
                 else { return RedirectToAction("Index", "Home"); }
             }
 
-            
+
+          
+
+
         }
     }
 }
